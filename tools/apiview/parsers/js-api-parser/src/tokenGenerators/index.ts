@@ -12,6 +12,7 @@ import { propertyTokenGenerator } from "./property";
 import { typeAliasTokenGenerator } from "./typeAlias";
 import { variableTokenGenerator } from "./variable";
 import { namespaceTokenGenerator } from "./namespace";
+import { indexSignatureTokenGenerator } from "./indexSignature";
 
 export interface GeneratorResult {
   tokens: ReviewToken[];
@@ -36,4 +37,5 @@ export const generators: TokenGenerator[] = [
   typeAliasTokenGenerator,
   variableTokenGenerator,
   namespaceTokenGenerator,
+  indexSignatureTokenGenerator,
 ];
