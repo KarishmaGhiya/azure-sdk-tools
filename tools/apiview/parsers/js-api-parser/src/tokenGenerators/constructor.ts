@@ -4,7 +4,13 @@ import { ReviewToken, TokenKind } from "../models";
 import { TokenGenerator, GeneratorResult } from "./index";
 import { createToken, processExcerptTokens } from "./helpers";
 
-const PARAMETER_PROPERTY_MODIFIERS = new Set(["public", "private", "protected", "readonly"]);
+const PARAMETER_PROPERTY_MODIFIERS = new Set([
+  "public",
+  "private",
+  "protected",
+  "readonly",
+  "override",
+]);
 
 function isValid(item: ApiItem): item is ApiConstructor {
   return item.kind === ApiItemKind.Constructor;
