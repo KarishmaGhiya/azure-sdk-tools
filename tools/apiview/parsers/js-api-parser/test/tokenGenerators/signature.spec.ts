@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { callableSignatureTokenGenerator } from "../../src/tokenGenerators/signature";
+import { callableSignatureTokenGenerator } from "../../src/tokenGenerators/callableSignature";
 import {
   ApiCallSignature,
   ApiConstructSignature,

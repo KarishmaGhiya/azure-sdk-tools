@@ -6,7 +6,7 @@ import { functionTokenGenerator } from "./function";
 import { interfaceTokenGenerator } from "./interfaces";
 import { classTokenGenerator } from "./class";
 import { constructorTokenGenerator } from "./constructor";
-import { callableSignatureTokenGenerator } from "./signature";
+import { callableSignatureTokenGenerator } from "./callableSignature";
 import { methodTokenGenerator } from "./method";
 import { propertyTokenGenerator } from "./property";
 import { typeAliasTokenGenerator } from "./typeAlias";

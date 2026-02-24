@@ -486,11 +486,51 @@ export function buildTypeNodeTokens(
 
 
   if (ts.isFunctionTypeNode(node)) {
+    if (node.typeParameters?.length) {
+      tokens.push(createToken(TokenKind.Punctuation, "<", { deprecated }));
+      node.typeParameters.forEach((typeParameter, index) => {
+        tokens.push(createToken(TokenKind.TypeName, typeParameter.name.getText(), { deprecated }));
+
+        if (typeParameter.constraint) {
+          tokens.push(
+            createToken(TokenKind.Keyword, "extends", {
+              hasPrefixSpace: true,
+              hasSuffixSpace: true,
+              deprecated,
+            }),
+          );
+          addTypeNodeTokensOrInlineLiteral(typeParameter.constraint, tokens, children, deprecated, depth);
+        }
+
+        if (typeParameter.default) {
+          tokens.push(
+            createToken(TokenKind.Punctuation, "=", {
+              hasPrefixSpace: true,
+              hasSuffixSpace: true,
+              deprecated,
+            }),
+          );
+          addTypeNodeTokensOrInlineLiteral(typeParameter.default, tokens, children, deprecated, depth);
+        }
+
+        if (index < node.typeParameters!.length - 1) {
+          tokens.push(
+            createToken(TokenKind.Punctuation, ",", { hasSuffixSpace: true, deprecated }),
+          );
+        }
+      });
+      tokens.push(createToken(TokenKind.Punctuation, ">", { deprecated }));
+    }
+
     tokens.push(createToken(TokenKind.Punctuation, "(", { deprecated }));
 
     node.parameters.forEach((param, index) => {
       if (index > 0) {
         tokens.push(createToken(TokenKind.Punctuation, ",", { hasSuffixSpace: true, deprecated }));
+      }
+
+      if (param.dotDotDotToken) {
+        tokens.push(createToken(TokenKind.Punctuation, "...", { deprecated }));
       }
 
       tokens.push(createToken(TokenKind.MemberName, param.name.getText(), { deprecated }));
