@@ -162,7 +162,7 @@ describe("callableSignatureTokenGenerator", () => {
       const { tokens } = callableSignatureTokenGenerator.generate(mock, false);
       const values = tokens.map((t) => t.Value);
 
-      expect(values).toEqual(["(", "):", "void", ";"]);
+      expect(values).toEqual(["(", ")", ":", "void", ";"]);
     });
 
     it("generates tokens for a call signature with parameters", () => {
@@ -272,7 +272,7 @@ describe("callableSignatureTokenGenerator", () => {
       const { tokens } = callableSignatureTokenGenerator.generate(mock, false);
       const values = tokens.map((t) => t.Value);
 
-      expect(values).toEqual(["new", "(", "):", "MyClass", ";"]);
+      expect(values).toEqual(["new", "(", ")", ":", "MyClass", ";"]);
       expect(tokens[0].Kind).toBe(TokenKind.Keyword);
     });
 
